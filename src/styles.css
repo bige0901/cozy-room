@@ -1,0 +1,225 @@
+:root {
+  --ink: #1c1916;
+  --paper: #f4efe4;
+  --mint: #c7ebe6;
+  --peach: #f3c89a;
+  --teal: #3f8f86;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--mint);
+  color: var(--ink);
+  font-family: "ZCOOL XiaoWei", "Songti SC", serif;
+}
+
+canvas {
+  display: block;
+  outline: none;
+}
+
+.hud {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.hud * {
+  pointer-events: auto;
+}
+
+.title-card {
+  position: absolute;
+  left: 28px;
+  top: 24px;
+  max-width: min(420px, calc(100vw - 48px));
+}
+
+.title-card h1 {
+  margin: 0;
+  font-family: "ZCOOL KuaiLe", "ZCOOL XiaoWei", sans-serif;
+  font-size: clamp(28px, 4vw, 44px);
+  letter-spacing: 0.04em;
+  text-shadow: 0 2px 0 #fff6;
+}
+
+.title-card p {
+  margin: 8px 0 0;
+  font-size: 16px;
+  line-height: 1.5;
+  opacity: 0.82;
+}
+
+.hint {
+  position: absolute;
+  left: 50%;
+  bottom: 28px;
+  transform: translateX(-50%);
+  padding: 10px 16px;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: #fff8ef;
+  box-shadow: 4px 4px 0 var(--ink);
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.hover-label {
+  position: absolute;
+  left: 50%;
+  top: 28px;
+  transform: translateX(-50%);
+  padding: 8px 14px;
+  background: #1c1916;
+  color: #fff8ef;
+  border-radius: 999px;
+  font-size: 14px;
+}
+
+.back-link,
+.close-btn {
+  appearance: none;
+  border: 2px solid var(--ink);
+  background: #fff8ef;
+  color: var(--ink);
+  font: inherit;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.back-link {
+  position: absolute;
+  left: 24px;
+  top: 24px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  box-shadow: 3px 3px 0 var(--ink);
+}
+
+.placeholder-page {
+  min-height: 100%;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 20% 10%, #fff 0, transparent 28%),
+    linear-gradient(180deg, #d7f1ec, #f6e3c6);
+  padding: 80px 24px 40px;
+}
+
+.placeholder-card {
+  width: min(560px, 100%);
+  padding: 36px 32px;
+  border: 3px solid var(--ink);
+  border-radius: 28px;
+  background: #fffaf1;
+  box-shadow: 10px 10px 0 var(--ink);
+}
+
+.placeholder-card span {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--peach);
+  border: 2px solid var(--ink);
+  font-size: 13px;
+}
+
+.placeholder-card h1 {
+  font-family: "ZCOOL KuaiLe", sans-serif;
+  margin: 16px 0 8px;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(28, 25, 22, 0.38);
+  z-index: 8;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.modal {
+  width: min(720px, 100%);
+  max-height: min(82vh, 760px);
+  overflow: auto;
+  background: #fffaf1;
+  border: 3px solid var(--ink);
+  border-radius: 28px;
+  box-shadow: 10px 10px 0 var(--ink);
+  padding: 28px;
+  position: relative;
+}
+
+.modal h2 {
+  font-family: "ZCOOL KuaiLe", sans-serif;
+  margin: 0 20px 8px 0;
+}
+
+.close-btn {
+  position: absolute;
+  right: 18px;
+  top: 18px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  justify-content: center;
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.photo-slot {
+  aspect-ratio: 1;
+  border: 2px dashed var(--ink);
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  background: repeating-linear-gradient(
+    -12deg,
+    #f4efe4,
+    #f4efe4 8px,
+    #eadfce 8px,
+    #eadfce 16px
+  );
+  text-align: center;
+  padding: 12px;
+  font-size: 14px;
+}
+
+.grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 6;
+  opacity: 0.18;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+}
+
+.paper-stroke {
+  position: fixed;
+  inset: 10px;
+  border: 2px solid var(--ink);
+  border-radius: 18px;
+  pointer-events: none;
+  z-index: 5;
+  opacity: 0.35;
+}
